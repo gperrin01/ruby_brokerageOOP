@@ -2,8 +2,9 @@ class Brokerage
 
   attr_accessor
 
-  def initialize(options={})
- 
+  def initialize 
+    @name = 'GA Securities'
+    @clients = {}
   end
 
 

@@ -2,8 +2,9 @@ class Portfolio
 
   attr_accessor
 
-  def initialize(options={})
- 
+  def initialize(name, stocks)
+    @name = name
+    @stocks = stocks || {}
   end
 
 
