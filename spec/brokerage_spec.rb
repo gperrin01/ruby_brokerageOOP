@@ -10,6 +10,10 @@ describe Brokerage do
     brokerage.create_client(client)
     expect(brokerage.client_count).to eq 1
   end
+  it "can list all clients and their balances" do
+    client_two = Client.new({name: 'test2', balance: '300'})
+
+  end
 
 
 end

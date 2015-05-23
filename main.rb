@@ -24,11 +24,11 @@ energy_pf = Portfolio.new('Energy p/f', {
           ge.name => ge, solarwind.name => solarwind, green_energy.name => green_energy
           })
 
-bob = Client.new("Bob", "750000", {
+bob = Client.new(name: "Bob", balace: "750000", portfolios:{
         tech_pf.name => tech_pf, bank_pf => bank_pf, energy_pf.name => energy_pf
   })
 
-ga_securities = Brokerage.new('GA Securities', {bob.name => bob})
+ga_securities = Brokerage.new(name: 'GA Securities', clients: {bob.name => bob})
 
 def menu
   puts `clear`
@@ -58,11 +58,27 @@ while response != 'q'
     balance = gets.to_f
     Client.new(name, balance)
   when '2'
+    puts "Let's create a new portfolio"
+    print "Portfolio's name: "
+    name = gets.chomp
+    Portfolio.new(name)
   when '3'
-  when '4'
-  when '5'
-  when '6'
-  when '7'
+    puts "Buy stock"
+    puts "For which client? \n#{ga_securities.clients.keys}"
+    client = ga_securities[:gets.chomp]
+    puts "For which portfolio? \n#{client.portfolios.keys}"
+    portfolio = client[:gets.chomp]
+    print "Stock name? \n#{portfolio.stocks.keys}"
+    stock = portfolio[:gets.chomp.downcase]
+    print "How many shares: "
+    no_shares = gets.to_f
+    print "Confirm trading price: "
+    price = gets.to_f
+    client.buy(stock, no_shares, price, portfolio)
+  # when '4'
+  # when '5'
+  # when '6'
+  # when '7'
   end
   puts '-'*40
   puts "Press Enter to go back to main menu"
