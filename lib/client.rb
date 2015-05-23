@@ -1,11 +1,11 @@
 class Client
 
-  attr_accessor
+  attr_accessor :name, :balance, :portfolios
 
-  def initialize(name, balance, portfolios)
-    @name = name
-    @balance = balance
-    @portfolios = portfolios || {}
+  def initialize(options ={})
+    @name = options[:name]
+    @balance = options[:balance]
+    @portfolios = options[:portfolios] || {}
    end
 
 

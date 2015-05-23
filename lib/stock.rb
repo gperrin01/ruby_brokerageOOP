@@ -1,6 +1,6 @@
 class Stock
 
-  attr_accessor :name
+  attr_accessor :name, :no_shares, :price
 
   def initialize(name, no_shares, price)
     @name = name
