@@ -1,0 +1,5 @@
+require 'pry'
+require-relative '../lib/brokerage'
+require-relative '../lib/client'
+require-relative '../lib/portfolio'
+require-relative '../lib/stock'
