@@ -24,7 +24,7 @@ energy_pf = Portfolio.new({name: 'Energy', stocks: {
           ge.name => ge, solarwind.name => solarwind, green_energy.name => green_energy
           }})
 
-bob = Client.new(name: "Bob", balace: "750000", portfolios:{
+bob = Client.new(name: "Bob", balance: 750000, portfolios:{
         tech_pf.name => tech_pf, bank_pf => bank_pf, energy_pf.name => energy_pf
   })
 
@@ -50,6 +50,7 @@ response = menu
 while response != 'q'
 
   case response
+    
   when '1'
     puts "Let's create a new client"
     print "Client's name: "
@@ -99,11 +100,15 @@ while response != 'q'
     client.sell(stock, sold_shares, price, portfolio)
     puts "#{client.name} sold #{sold_shares} #{stock.name} at $#{price} for #{portfolio.name}. \n New balance is #{client.balance}"
 
+  when '5'
+    ga_securities.clients.each{|name, client| puts "#{name} has a balance of #{client.balance}"}
 
+  when '6'
+    puts "For which client? \n#{ga_securities.clients.keys.join(' ')}"
+    client = ga_securities.clients[gets.chomp]
 
-  # when '5'
-  # when '6'
-  # when '7'
+  when '7'
+
   end
   puts '-'*40
   puts "Press Enter to go back to main menu"
@@ -113,8 +118,3 @@ end
 
 
 
-
-
-
-binding.pry
-nil

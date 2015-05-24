@@ -18,5 +18,9 @@ class Portfolio
     end
   end
 
+  def balance
+    # sum for each stock: noshares*price
+  end
+
 
 end
