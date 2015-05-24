@@ -14,8 +14,6 @@ describe Portfolio do
   end
 
 
-   # client.create_portfolio(portfolio)
-   #  client.buy(stock, 10, 140, portfolio)
 
 
 end
