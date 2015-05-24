@@ -82,9 +82,25 @@ while response != 'q'
     print "Confirm trading price: "
     price = gets.to_f
     client.buy(stock, extra_shares, price, portfolio)
-    puts "#{client.name} bought #{extra_shares} #{stock.name} at $#{price} for #{portfolio.name}"
+    puts "#{client.name} bought #{extra_shares} #{stock.name} at $#{price} for #{portfolio.name}. \n New balance is #{client.balance}"
 
-  # when '4'
+  when '4'
+    puts "Sell stock"
+    puts "For which client? \n#{ga_securities.clients.keys.join(' ')}"
+    client = ga_securities.clients[gets.chomp]
+    puts "For which portfolio? \n#{client.portfolios.keys.join(' ')}"
+    portfolio = client.portfolios[gets.chomp]
+    puts "Stock name? \n#{portfolio.stocks.keys.join(' ')}"
+    stock = portfolio.stocks[gets.chomp.downcase.to_sym]
+    print "How many shares: "
+    sold_shares = gets.to_f
+    print "Confirm trading price: "
+    price = gets.to_f
+    client.sell(stock, sold_shares, price, portfolio)
+    puts "#{client.name} sold #{sold_shares} #{stock.name} at $#{price} for #{portfolio.name}. \n New balance is #{client.balance}"
+
+
+
   # when '5'
   # when '6'
   # when '7'

@@ -25,4 +25,11 @@ class Client
     end
   end
 
+  def sell(stock, sold_shares, price, portfolio)
+    stock.no_shares -= sold_shares
+    stock.price = price
+    @balance += price*sold_shares
+    # not checking numshares to sell as we allow short selling
+  end
+
 end

@@ -25,7 +25,16 @@ describe Client do
   end
   
   it "updates client balance after purchase" do
-
+    client.create_portfolio(portfolio)
+    client.buy(stock, 10, 140, portfolio)
+    expect(client.balance).to eq 600
   end
+  it "updates client balance after selling" do
+    client.create_portfolio(portfolio)
+    client.sell(stock, 10, 140, portfolio)
+    expect(client.balance).to eq 3400
+  end
+
+
 
 end

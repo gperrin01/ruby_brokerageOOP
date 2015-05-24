@@ -17,5 +17,14 @@ describe Stock do
     client.buy(stock, 10, 140, portfolio)
     expect(stock.price).to eq 140
   end
-
+  it "updates the number of shares in the stocks after selling" do
+    client.create_portfolio(portfolio)
+    client.sell(stock, 10, 140, portfolio)
+    expect(stock.no_shares).to eq 40
+  end
+  it "updates price of stock after selling" do
+    client.create_portfolio(portfolio)
+    client.sell(stock, 10, 140, portfolio)
+    expect(stock.price).to eq 140
+  end
 end
