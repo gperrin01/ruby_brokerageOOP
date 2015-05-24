@@ -25,5 +25,9 @@ class Portfolio
     total
   end
 
+  def self.all
+    ObjectSpace.each_object(self).to_a
+  end
+
 
 end
