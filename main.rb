@@ -4,25 +4,25 @@ require_relative 'lib/client'
 require_relative 'lib/portfolio'
 require_relative 'lib/stock'
 
-aapl = Stock.new(:aapl, 24, 132.5)
-goog = Stock.new(:goog, 2, 540 )
-amzn = Stock.new(:amzn, 40, 427)
-usd_bank = Stock.new(:usd_bank, 4, 76)
-td_bank = Stock.new(:td_bank, 34, 143)
-bofa = Stock.new(:bofa, 10, 44 )
-ge = Stock.new(:ge, 10, 200)
-solarwind = Stock.new(:solarwind, 10,112 )
-green_energy = Stock.new(:green_energy, 10, 200)
+aapl = Stock.new({name: :aapl, no_shares: 24, price: 132})
+goog = Stock.new({name: :goog, no_shares: 2, price: 540} )
+amzn = Stock.new({name: :amzn, no_shares: 40, price: 427})
+usd_bank = Stock.new({name: :usd_bank, no_shares: 4, price: 76})
+td_bank = Stock.new({name: :td_bank, no_shares: 34, price: 143})
+bofa = Stock.new({name: :bofa, no_shares: 10, price: 44} )
+ge = Stock.new({name: :ge, no_shares: 10, price: 200})
+solarwind = Stock.new({name: :solarwind, no_shares: 10,price: 112})
+green_energy = Stock.new({name: :green_energy, no_shares: 10, price: 200})
 
-tech_pf = Portfolio.new('Tech p/f', {
+tech_pf = Portfolio.new({name:'Tech', stocks: {
           aapl.name => aapl, goog.name => goog, amzn.name=> amzn
-          })
-bank_pf = Portfolio.new('Bank p/f', {
+          } })
+bank_pf = Portfolio.new({name: 'Bank', stocks: {
           usd_bank.name => usd_bank, td_bank.name => td_bank, bofa.name => bofa
-          })
-energy_pf = Portfolio.new('Energy p/f', {
+          }})
+energy_pf = Portfolio.new({name: 'Energy', stocks: {
           ge.name => ge, solarwind.name => solarwind, green_energy.name => green_energy
-          })
+          }})
 
 bob = Client.new(name: "Bob", balace: "750000", portfolios:{
         tech_pf.name => tech_pf, bank_pf => bank_pf, energy_pf.name => energy_pf
@@ -56,25 +56,34 @@ while response != 'q'
     name = gets.chomp
     print "Client's balance: "
     balance = gets.to_f
-    Client.new(name, balance)
+    client = Client.new({name: name, balance: balance})
+    ga_securities.create_client(client)
+
   when '2'
     puts "Let's create a new portfolio"
+    puts "For which client? \n#{ga_securities.clients.keys.join(' ')}"
+    client = ga_securities.clients[gets.chomp]
     print "Portfolio's name: "
     name = gets.chomp
-    Portfolio.new(name)
+    portfolio = Portfolio.new({name: name})
+    client.create_portfolio(portfolio)
+    puts "Portfolio #{portfolio.name} added to #{client.name}"
+
   when '3'
     puts "Buy stock"
-    puts "For which client? \n#{ga_securities.clients.keys}"
-    client = ga_securities[:gets.chomp]
-    puts "For which portfolio? \n#{client.portfolios.keys}"
-    portfolio = client[:gets.chomp]
-    print "Stock name? \n#{portfolio.stocks.keys}"
-    stock = portfolio[:gets.chomp.downcase]
+    puts "For which client? \n#{ga_securities.clients.keys.join(' ')}"
+    client = ga_securities.clients[gets.chomp]
+    puts "For which portfolio? \n#{client.portfolios.keys.join(' ')}"
+    portfolio = client.portfolios[gets.chomp]
+    puts "Stock name? \n#{portfolio.stocks.keys.join(' ')}"
+    stock = portfolio.stocks[gets.chomp.downcase.to_sym]
     print "How many shares: "
-    no_shares = gets.to_f
+    extra_shares = gets.to_f
     print "Confirm trading price: "
     price = gets.to_f
-    client.buy(stock, no_shares, price, portfolio)
+    client.buy(stock, extra_shares, price, portfolio)
+    puts "#{client.name} bought #{extra_shares} #{stock.name} at $#{price} for #{portfolio.name}"
+
   # when '4'
   # when '5'
   # when '6'

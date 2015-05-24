@@ -8,5 +8,15 @@ class Client
     @portfolios = options[:portfolios] || {}
    end
 
+  def create_portfolio(portfolio)
+    @portfolios[portfolio.name] = portfolio
+  end
+  def portfolio_count
+    @portfolios.length
+  end
+
+  def buy(stock, extra_shares, price, portfolio)
+    
+  end
 
 end

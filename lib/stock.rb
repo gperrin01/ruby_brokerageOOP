@@ -2,10 +2,10 @@ class Stock
 
   attr_accessor :name, :no_shares, :price
 
-  def initialize(name, no_shares, price)
-    @name = name
-    @no_shares = no_shares
-    @price = price
+  def initialize(options={})
+    @name = options[:name]
+    @no_shares = options[:no_shares]
+    @price = options[:price]
   end
 
 
