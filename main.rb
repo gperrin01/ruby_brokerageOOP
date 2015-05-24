@@ -50,7 +50,7 @@ response = menu
 while response != 'q'
 
   case response
-    
+
   when '1'
     puts "Let's create a new client"
     print "Client's name: "
@@ -106,6 +106,7 @@ while response != 'q'
   when '6'
     puts "For which client? \n#{ga_securities.clients.keys.join(' ')}"
     client = ga_securities.clients[gets.chomp]
+    client.portfolios.each{|name, portfolio| puts "#{name} has a balance of #{portfolio.compute_balance}"}
 
   when '7'
 

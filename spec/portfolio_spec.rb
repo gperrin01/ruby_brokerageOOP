@@ -13,7 +13,11 @@ describe Portfolio do
     expect(portfolio.stock_count).to eq 1
   end
 
-
+  it "updates its own balance after purchase" do
+    expect(portfolio.compute_balance).to eq 0
+    portfolio.add_stock(stock)
+    expect(portfolio.compute_balance).to eq 5000
+  end
 
 
 end

@@ -18,8 +18,11 @@ class Portfolio
     end
   end
 
-  def balance
-    # sum for each stock: noshares*price
+  def compute_balance
+    # @stocks = { 'aapl': Object AAPL, 'amzn': Object AMZN}
+    total = 0
+    @stocks.each_value{|stock| total += stock.price*stock.no_shares}
+    total
   end
 
 
